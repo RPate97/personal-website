@@ -27,20 +27,20 @@ export const styles = {
     },
 
     navBar: {
-        borderBottomRightRadius: 100,
-        position: "sticky",
-        top: 0,
-        color: AppColors.primaryForeground,
-        paddingRight: 40,
-        paddingLeft: 40,
-        paddingTop: 10,
-        paddingBottom: 10,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        height: 100,
-        alignItems: "center",
-        zIndex: 10,
+        // borderBottomRightRadius: 100,
+        // position: "sticky",
+        // top: 0,
+        // color: AppColors.primaryForeground,
+        // paddingRight: 40,
+        // paddingLeft: 40,
+        // paddingTop: 10,
+        // paddingBottom: 10,
+        // display: "flex",
+        // flexDirection: "row",
+        // justifyContent: "space-between",
+        // height: 100,
+        // alignItems: "center",
+        // zIndex: 10,
         primaryElement: {
             fontSize: FontSizes.title,
             lineHeight: "1.15",
@@ -73,12 +73,12 @@ export const styles = {
                 fontSize: FontSizes.title,
             }
         },
-        navigation: {
-            height: 100,
-            display: "flex",
-            flexDirection: "row",   
-            alignItems: "center",       
-        },
+        // navigation: {
+        //     height: 100,
+        //     display: "flex",
+        //     flexDirection: "row",   
+        //     alignItems: "center",       
+        // },
     },
 
     title: {
@@ -169,7 +169,6 @@ export const styles = {
                     width: "40%",
                     opacity: "0.1",
                     marginRight: 20,
-                    textAlign: "right",
                     height: "-moz-min-content",
                     height: "-webkit-min-content",
                     height: "min-content",
@@ -183,6 +182,7 @@ export const styles = {
                     width: "40%",
                     opacity: "0.1",
                     borderRadius: 10,
+                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                 },   
             }, 
             rightLeft: {
@@ -192,6 +192,7 @@ export const styles = {
                     width: "40%",
                     opacity: "0.1",
                     borderRadius: 10,
+                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                 },
                 right: {
                     backgroundColor: AppColors.primaryBackground,
@@ -213,7 +214,18 @@ export const styles = {
 
     footer: { 
         height: 150,
-        // backgroundColor: AppColors.primaryBackground,
+        display: "flex",
+        width: "50%",
+        height: 200,
+        margin: "auto",
+        borderRadius: 10,
+        alignItems: "center",
+        justifyContent: "center",
+        text: {
+            fontSize: FontSizes.text,
+            color: AppColors.primaryForeground,
+            textAlign: "center",
+        }
     },
     
 };

@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
-import { NavBar } from '../components/NavBar.js';
+import { NavBar } from 'components/nav-bar';
 import { styles } from '../styles/styles.js';
 import { Footer } from '../components/footer';
 import { Portfolio } from '../components/portfolio/portfolio';
@@ -14,7 +14,7 @@ export default function Home() {
   const portfolioTrigger = useRef(null);
   const valuesTrigger = useRef(null);
   const resumeTrigger = useRef(null);
-  const navRef = useRef(null);  
+  const [section, setSection] = useState(0);
 
   const introIntersection = useIntersection(introTrigger, {
     root: null,
@@ -25,13 +25,13 @@ export default function Home() {
   const portfolioIntersection = useIntersection(portfolioTrigger, {
     root: null,
     rootMargin: '0px',
-    threshold: 0.3,
+    threshold: 0.2,
   });
 
   const valuesIntersection = useIntersection(valuesTrigger, {
     root: null,
     rootMargin: '0px',
-    threshold: 1.0,
+    threshold: 0.2,
   });
 
   const resumeIntersection = useIntersection(resumeTrigger, {
@@ -42,22 +42,18 @@ export default function Home() {
 
   useEffect(
     () => {
-      console.log("use effect");
+      console.log("trigger")
       if (introIntersection && introIntersection.isIntersecting) {
-        console.log("setting intro section");
-        navRef.current.setSection(0);
+        setSection(0);
       } else if (portfolioIntersection && portfolioIntersection.isIntersecting) {
-        console.log("setting portfolio section");
-        navRef.current.setSection(1);
+        setSection(1);
       } else if (valuesIntersection && valuesIntersection.isIntersecting) {
-        console.log("setting values section");
-        navRef.current.setSection(2);
+        setSection(2);
       } else if (resumeIntersection && resumeIntersection.isIntersecting) {
-        console.log("setting resume section");
-        navRef.current.setSection(3);
+        setSection(3);
       }
     },
-    [ introIntersection, portfolioIntersection, valuesIntersection, resumeIntersection ],
+    [ introIntersection, portfolioIntersection, valuesIntersection, resumeIntersection, setSection ],
   );
 
 
@@ -70,7 +66,7 @@ export default function Home() {
       </Head>
 
       <main style={styles.main}>
-        <NavBar page={0} ref={navRef} />
+        <NavBar section={section} setSection={setSection} />
         <Intro innerRef={introTrigger} />
         <Portfolio innerRef={portfolioTrigger} />
         <Values innerRef={valuesTrigger} />

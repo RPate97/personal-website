@@ -56,15 +56,12 @@ export const RightLeftTextImage = (props) => {
         <div style={styles.portfolio.item} ref={trigger}>
             <img src={props.image} alt="Italian Trulli" style={styles.portfolio.item.rightLeft.left} ref={picReference} />      
             <div ref={textReference} style={styles.portfolio.item.rightLeft.right}>
-                <h1 style={styles.title}>{props.title}</h1>
-                <p1>{props.text}</p1>              
+                {props.children}            
             </div>
         </div>
     )
 };
 
-RightLeftTextImage.PropTypes = {
-    title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+RightLeftTextImage.propTypes = {
     image: PropTypes.string.isRequired,
 }

@@ -8,8 +8,10 @@ export const Intro = ({ innerRef }) => {
                 title="Intro Section"
                 text="This is an intro section filled with interesting information about myself and my work."
                 image="stonks.jpg"
-            />
-            {/* <img src="1.jpg" alt="night sky" width="100%" height="100%" style={styles.intro.backgroundImage} />       */}
+            >
+                <h1 style={styles.title}>Ryan Pate</h1>
+                <p1>Software Engineer based in Corvallis Oregon. Scroll down to view my personal projects, values, and resume.</p1>
+            </RightLeftTextImage>
         </div>
     )
 }

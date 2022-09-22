@@ -86,9 +86,9 @@ export const Values = ({ innerRef }) => {
 
     return (
         <Element name="valuesSection">
-            <div ref={innerRef}> 
+            <div ref={trigger}> 
                 <h1 style={styles.sectionTitle}>Values</h1>
-                <div style={styles.values.grid} ref={trigger}>
+                <div style={styles.values.grid}>
                     {
                         data.map((e, i) => {
                             return <GridItem element={e} key={i}/>

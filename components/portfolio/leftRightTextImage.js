@@ -53,8 +53,7 @@ export const LeftRightTextImage = (props) => {
     return (
         <div style={styles.portfolio.item} ref={trigger}>
             <div ref={textReference} style={styles.portfolio.item.leftRight.left}>
-                <h1 style={styles.title}>{props.title}</h1>
-                <p1>{props.text}</p1>              
+                {props.children}            
             </div>
             <img src={props.image} alt="Italian Trulli" style={styles.portfolio.item.leftRight.right} ref={picReference} />      
         </div>
@@ -62,8 +61,6 @@ export const LeftRightTextImage = (props) => {
 };
 
 // require title, text, and image
-LeftRightTextImage.PropTypes = {
-    title: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
+LeftRightTextImage.propTypes = {
     image: PropTypes.string.isRequired,
 }

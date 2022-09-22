@@ -1,38 +1,31 @@
-import React, { useImperativeHandle } from 'react';
+import React from 'react';
 import { useState } from 'react';
-import { PropTypes } from 'prop-types';
-import { styles } from '../styles/styles.js';
+import { styles } from 'styles/styles.js';
 import { AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
-import * as Scroll from 'react-scroll';
-const Link = Scroll.Link;
-let scroll = Scroll.animateScroll;
+import { Link, animateScroll } from 'react-scroll';
+import { Flex } from '@chakra-ui/react';
 
-export const NavBar = React.forwardRef((props, ref) => {
+type Props = {
+    section: number,
+    setSection: React.Dispatch<React.SetStateAction<number>>
+};
+
+export const NavBar: React.FC<Props> = ({section, setSection}) => {
     const [hoveredItem, setHoveredItem] = useState(-1);
-    const [selectedSection, setSelectedSection] = useState(0);
-    const [isScrolling, setIsScrolling] = useState(false);
-
-    useImperativeHandle(ref, () => ({
-        setSection: (index) => {
-            if (!isScrolling) {
-                setSelectedSection(index);
-            }
-        }
-    }));
-
+    console.log(section);
     function scrollToTop() {
         let options = {};
-        if (selectedSection === 0) {
+        if (section === 0) {
             options = {duration: 100}
-        } else if (selectedSection === 1) {
+        } else if (section === 1) {
             options = {duration: 300}
-        } else if (selectedSection === 2) {
+        } else if (section === 2) {
             options = {duration: 500}
-        } else if (selectedSection === 3) {
+        } else if (section === 3) {
             options = {duration: 500}
         }
-        scroll.scrollToTop(options);
-        setSelectedSection(0);
+        animateScroll.scrollToTop(options);
+        setSection(0);
     }
 
     function handleSetActive(i) {
@@ -42,25 +35,25 @@ export const NavBar = React.forwardRef((props, ref) => {
     function getScrollDuration(targetSection) {
         let duration;
         if (targetSection === 0) {
-            if (selectedSection === 1) {
+            if (section === 1) {
                 duration = 300;
             } else {
                 duration = 500;
             }
         } else if (targetSection === 1) {
-            if (selectedSection === 0) {
+            if (section === 0) {
                 duration = 300;
             } else {
                 duration = 500;
             }
         } else if (targetSection === 2) {
-            if (selectedSection === 0 || selectedSection === 1) {
+            if (section === 0 || section === 1) {
                 duration = 500;
             } else {
                 duration = 300;
             }
         } else if (targetSection === 3) {
-            if (selectedSection === 2) {
+            if (section === 2) {
                 duration = 300;
             } else {
                 duration = 500;
@@ -70,22 +63,37 @@ export const NavBar = React.forwardRef((props, ref) => {
     }
 
     return (
-        <div style={styles.navBar}>
+        <Flex 
+            position="sticky"
+            top={0}
+            flexDir="row"
+            justifyContent="space-between"
+            alignItems="center"
+            zIndex={3}
+            display="flex"
+            paddingRight={40}
+            paddingLeft={40}
+            paddingTop={10}
+            paddingBottom={10}
+        >
             <h1 style={styles.navBar.primaryElement}>
-                <Link href="/">
-                    <a>Ryan Pate</a>
-                </Link>                
+                <Link to="/">Ryan Pate</Link>                
             </h1>
             
-            <div style={styles.navBar.navigation}>
-                <h1 style={selectedSection === 0 || hoveredItem === 0 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
+            <Flex 
+                height={100}
+                display="flex"
+                flexDirection="row"   
+                alignItems="center"     
+            >
+                <h1 style={section === 0 || hoveredItem === 0 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
                     onMouseEnter={() => setHoveredItem(0)}
                     onMouseLeave={() => setHoveredItem(-1)}>
                     <a onClick={scrollToTop}>
                         Home
                     </a>             
                 </h1>
-                <h1 style={selectedSection === 1  || hoveredItem === 1 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
+                <h1 style={section === 1  || hoveredItem === 1 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
                     onMouseEnter={() => setHoveredItem(1)}
                     onMouseLeave={() => setHoveredItem(-1)}>
                     <Link to="portfolioSection" 
@@ -93,11 +101,11 @@ export const NavBar = React.forwardRef((props, ref) => {
                         smooth={true} 
                         offset={-50} 
                         duration={getScrollDuration(1)} 
-                        onClick={() => setSelectedSection(1)}>
+                        onClick={() => setSection(1)}>
                         Portfolio
                     </Link>
                 </h1>
-                <h1 style={selectedSection === 2  || hoveredItem === 2 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
+                <h1 style={section === 2  || hoveredItem === 2 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
                     onMouseEnter={() => setHoveredItem(2)}
                     onMouseLeave={() => setHoveredItem(-1)}>
                     <Link to="valuesSection" 
@@ -105,11 +113,11 @@ export const NavBar = React.forwardRef((props, ref) => {
                         smooth={true} 
                         offset={-50} 
                         duration={getScrollDuration(2)} 
-                        onClick={() => setSelectedSection(2)}>
+                        onClick={() => setSection(2)}>
                         Values
                     </Link>                
                 </h1>  
-                <h1 style={selectedSection === 3 || hoveredItem === 3 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
+                <h1 style={section === 3 || hoveredItem === 3 ? styles.navBar.selectedElement : styles.navBar.secondaryElement}
                     onMouseEnter={() => setHoveredItem(3)}
                     onMouseLeave={() => setHoveredItem(-1)}>
                     <Link to="resumeSection" 
@@ -117,7 +125,7 @@ export const NavBar = React.forwardRef((props, ref) => {
                         smooth={true} 
                         offset={0} 
                         duration={getScrollDuration(3)} 
-                        onClick={() => setSelectedSection(3)}>
+                        onClick={() => setSection(3)}>
                         Resume
                     </Link>              
                 </h1>   
@@ -129,11 +137,7 @@ export const NavBar = React.forwardRef((props, ref) => {
                         <AiFillGithub style={hoveredItem == 5 ? styles.navBar.icons.selectedIcon : styles.navBar.icons.icon} onMouseEnter={() => setHoveredItem(5)} onMouseLeave={() => setHoveredItem(-1)}/>
                     </a>                         
                 </div>                    
-            </div>
-        </div>   
-    )
-});
-
-NavBar.PropTypes = {
-    page: PropTypes.number.isRequired,
-}
+            </Flex>
+        </Flex>
+    ) 
+};
